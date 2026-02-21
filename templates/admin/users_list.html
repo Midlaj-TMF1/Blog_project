@@ -22,7 +22,7 @@
       <td>{{ i.email }}</td>
       <td>{{i.bio}}</td>
       <td><img src="{{i.document.url}}" height="100" ></td>
-      <td><a href=""><button type="button" class="btn btn-secondary">Delete</button></a></td>
+      <td><a href="{% url 'users_delete' i.id %}"><button type="button" class="btn btn-secondary">Delete</button></a></td>
 
     </tr>
     {% empty %}

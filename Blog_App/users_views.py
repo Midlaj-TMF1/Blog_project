@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 
 from Blog_App.forms import UsersRegister, BlogPostRegister, LoginRegister
@@ -74,3 +75,7 @@ def blog_delete(request, id):
     bus_delete = BlogPost.objects.get(id=id)
     bus_delete.delete()
     return redirect('blo_list')
+
+def Logout_users(request):
+    logout(request)
+    return redirect('index')

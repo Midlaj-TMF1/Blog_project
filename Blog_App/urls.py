@@ -17,4 +17,7 @@ urlpatterns = [
     path("profile_edit",users_views.profile_edit,name="profile_edit"),
     path("blog_delete/<int:id>",users_views.blog_delete,name="blog_delete"),
     path("users_list", admin_views.users_list, name="users_list"),
+    path("users_delete/<int:id>",admin_views.users_delete, name="users_delete"),
+    path("Logout_users", users_views.Logout_users, name="Logout_users"),
+    path("Logout_admin",admin_views.Logout_admin, name="Logout_admin"),
 ]
