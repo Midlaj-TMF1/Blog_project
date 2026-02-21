@@ -1,0 +1,94 @@
+{% extends "users/users_home.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+.blog-card {
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+    background: #ffffff;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+
+.blog-img {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.blog-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: #1e293b;
+}
+
+.blog-date {
+    font-size: 13px;
+    color: #6b7280;
+}
+</style>
+
+<div class="container-fluid mt-4">
+
+    <!-- Header -->
+    <div class="mb-4">
+        <h3>Blogs</h3>
+        <p>Total Blogs: {{ data|length }}</p>
+    </div>
+
+    <div class="row">
+        {% for i in data %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card blog-card">
+
+                {% if i.document %}
+                    <img src="{{ i.document.url }}" class="blog-img w-100">
+                {% else %}
+                    <img src="https://via.placeholder.com/400x200" class="blog-img w-100">
+                {% endif %}
+
+                <div class="card-body">
+                    <div class="blog-title mb-2">
+                        {{ i.title }}
+                    </div>
+
+                    <p class="text-muted">
+                        {{ i.content|truncatewords:20 }}
+                    </p>
+
+                    <div class="blog-date">
+                        {{ i.date }}
+                    </div>
+                      <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-auto">
+                <a href="{% url 'blog_edit' i.id %}"
+                   class="btn btn-sm btn-primary">
+                    Edit
+                </a>
+
+                <a href="{% url 'blog_delete' i.id %}"
+                   class="btn btn-sm btn-danger">
+                    Delete
+                </a>
+            </div>
+                </div>
+            </div>
+
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5 text-muted">
+            No blog available
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
